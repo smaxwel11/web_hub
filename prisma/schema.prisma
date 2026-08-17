@@ -1,0 +1,20 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  // Vercel Postgres automatically provides these environment variables
+  url       = env("POSTGRES_PRISMA_URL") // Uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // Uses a direct connection
+}
+
+model Device {
+  id          String   @id @default(cuid())
+  deviceId    String   @unique // e.g. "Pi_Room_101"
+  status      String   // "recording", "idle", "offline"
+  className   String?  // Name of class being recorded, if any
+  lastPing    DateTime @default(now())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
