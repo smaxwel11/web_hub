@@ -17,9 +17,9 @@ export function DashboardClient({ initialDevices }: { initialDevices: any[] }) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {initialDevices.map(device => {
-        // Calculate if device is offline (no ping in the last 2 minutes)
+        // Calculate if device is offline (no ping in the last 15 minutes to account for 10-min polling)
         const lastPingDate = new Date(device.lastPing)
-        const isOffline = (new Date().getTime() - lastPingDate.getTime()) > 120000
+        const isOffline = (new Date().getTime() - lastPingDate.getTime()) > 900000
 
         let statusColor = 'bg-gray-200'
         let statusText = 'Unknown'
