@@ -15,6 +15,7 @@ model Device {
   status      String   // "recording", "idle", "offline"
   className   String?  // Name of class being recorded, if any
   lastPing    DateTime @default(now())
+  alertSent   Boolean  @default(false)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }

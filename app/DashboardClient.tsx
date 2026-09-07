@@ -51,7 +51,9 @@ export function DashboardClient({ initialDevices }: { initialDevices: any[] }) {
               </div>
               <div className="flex justify-between">
                 <span className="font-semibold text-gray-700">Last Ping:</span>
-                <span className="text-right">{lastPingDate.toLocaleTimeString()}</span>
+                <span className="text-right">
+                  {lastPingDate.toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit', hour12: true })}
+                </span>
               </div>
             </div>
           </div>

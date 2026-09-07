@@ -25,12 +25,14 @@ export async function POST(req: Request) {
         status: status,
         className: class_name || null,
         lastPing: new Date(),
+        alertSent: false, // Reset alert trap when device comes back online
       },
       create: {
         deviceId: device_id,
         status: status,
         className: class_name || null,
         lastPing: new Date(),
+        alertSent: false,
       },
     })
     
