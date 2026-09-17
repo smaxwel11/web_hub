@@ -8,6 +8,8 @@ declare global {
 const prisma = global.prisma || new PrismaClient()
 if (process.env.NODE_ENV !== 'production') global.prisma = prisma
 
+export const dynamic = 'force-dynamic'
+
 export async function GET(req: Request) {
   // Protect this endpoint so only Vercel Cron can trigger it
   const authHeader = req.headers.get('authorization')
