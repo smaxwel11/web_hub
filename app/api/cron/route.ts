@@ -11,10 +11,12 @@ if (process.env.NODE_ENV !== 'production') global.prisma = prisma
 export const dynamic = 'force-dynamic'
 
 export async function GET(req: Request) {
-  // Protect this endpoint so only Vercel Cron can trigger it
-  const authHeader = req.headers.get('authorization')
-  if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  // Protect this endpoint so only Vercel Cron or an authorized external service can trigger it
+  const authHeader = req.headers.get('authorization');
+  const urlKey = new URL(req.url).searchParams.get('key');
+
+  if (authHeader !== `Bearer ${process.env.CRON_SECRET}` && urlKey !== process.env.CRON_SECRET) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
   try {
